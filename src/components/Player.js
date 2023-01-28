@@ -9,19 +9,18 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 
-export default function Player(imageUrl, stationTitle, playFunction) {
+export default function Player({imageUrl, stationTitle, playFunction}) {
   return (
     <View>
       <View style={styles.player}>
-        {/* <Image source={imageUrl} /> */}
-        <Text style={styles.stationTitle}>
-          Jangadeiro BandNews FM Fortaleza 101.7
-        </Text>
+        <Image source={imageUrl} />
+        <Text style={styles.stationTitle}>{stationTitle}</Text>
         <Icon
           name="pausecircleo"
           color="white"
           size={32}
           style={styles.playerIcon}
+          onPress={playFunction}
         ></Icon>
       </View>
     </View>

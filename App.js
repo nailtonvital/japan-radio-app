@@ -30,26 +30,26 @@ export default function App() {
   }, [fontsLoaded]);
 
   // Audio
-  const [playbackObj, setPlaybackObj] = useState(null);
-  const [soundObj, setSoundObj] = useState(null);
+  const soundObj = new Audio.Sound();
+  const [image, setImage] = useState('')
+  const [title, setTitle] = useState("");
 
   async function playRadio(url) {
-    
-    // first time
-    const sound = new Audio.Sound();
-    if (soundObj === null) {
-      const status = await sound.loadAsync({ uri: url }, { shouldPlay: true });
-      setSoundObj(status);
-      return setPlaybackObj(sound)
+    try {
+      if(soundObj.isPlaying){
+        await soundObj.pauseAsync()
+      } else{
+        await soundObj.unloadAsync()
+        await soundObj.loadAsync({uri: url})
+        await soundObj.playAsync()
+      }
+    } catch (error) {
+      console.log(error)
     }
     
-    if (soundObj.isLoaded && soundObj.isPlaying) {
-      await sound.setStatusAsync({ shouldPlay: false });
-      
-    }
   }
 
-  // font ir
+  // font if
   if (!fontsLoaded) return null;
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#C0C0C0",
     borderRadius: 100,
-    height: 50,
+    height: 60,
     marginBottom: 25,
     opacity: 5,
     textAlign: "center",
@@ -227,6 +227,6 @@ const styles = StyleSheet.create({
     minHeight: 60,
     fontSize: 17,
     textAlign: "center",
-    fontFamily: "Poppins-Regular",
-  },
-});
+    fontFamily: "Poppins-Regular"
+  }
+})
