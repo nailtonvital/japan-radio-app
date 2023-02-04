@@ -9,42 +9,48 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 
-export default function Player({imageUrl, stationTitle, playFunction}) {
+export default function Player({ stationTitle, playFunction, isPlaying, setPlayStatus }) {
   return (
-    <View>
-      <View style={styles.player}>
-        <Image source={imageUrl} />
-        <Text style={styles.stationTitle}>{stationTitle}</Text>
-        <Icon
-          name="pausecircleo"
-          color="white"
-          size={32}
-          style={styles.playerIcon}
-          onPress={playFunction}
-        ></Icon>
-      </View>
+    <View style={styles.player}>
+      <Text style={styles.stationTitle}>{stationTitle}</Text>
+      <Icon
+        name={isPlaying ? "pausecircleo" : "playcircleo"}
+        color="white"
+        size={32}
+        style={styles.playerIcon}
+        onPress={() => {
+          playFunction(isPlaying, setPlayStatus);
+        }}
+      ></Icon>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   player: {
-      backgroundColor: "#434343",
-      width: "100%",
+    flex: 0,
+    alignSelf: "center",
+    position: "absolute",
+    bottom: 92,
+    backgroundColor: "#212121",
+    width: "95%",
     display: "flex",
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingHorizontal: 30,
+    paddingVertical: 18,
     minHeight: 75,
-    opacity: 25
+    opacity: 25,
+    borderRadius: 8,
   },
-  stationTitle:{
+  stationTitle: {
     color: "white",
     fontSize: 20,
-
+    flex: 1,
+    flexWrap: "wrap",
   },
-  playerIcon:{
-    paddingRight: 10
-  }
+  playerIcon: {
+    paddingRight: 10,
+  },
 });
