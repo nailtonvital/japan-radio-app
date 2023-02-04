@@ -6,19 +6,19 @@ This is a app that join various radios around the world into a sigle app
 ## Checklist
 
 ### Features:
-- [ ] Play
-- [ ] Pause
+- [x] Play
+- [x] Pause
 - [ ] Play on background
 - [ ] Search
 - [ ] Recent played
 - [ ] Search
 - [ ] Navigation
-- [ ] Categories split
+- [x] Categories split
 
 ### Screens/Components
-- [ ] Home
-- [ ] Search
+- [x] Home
+- [x] Search
 - [ ] Category
 - [ ] Settings
-- [ ] Player
-- [ ] Navbar
+- [x] Player
+- [x] Navbar
