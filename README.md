@@ -8,11 +8,11 @@ This is a app that join various radios around the world into a sigle app
 ### Features:
 - [x] Play
 - [x] Pause
-- [ ] Play on background
+- [x] Play on background
 - [ ] Search
 - [ ] Recent played
 - [ ] Search
-- [ ] Navigation
+- [x] Navigation
 - [x] Categories split
 
 ### Screens/Components
