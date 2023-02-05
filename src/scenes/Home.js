@@ -1,25 +1,32 @@
 import {
-  Button,
   ScrollView,
   StyleSheet,
   Text,
   View,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useState } from "react";
 
-import data from "../assets/japan.json";
+import data from "../assets/brazil.json";
 
-import Player from "../components/Player";
 import StationCard from "../components/StationCard";
-
-import HomeText from "../components/HomeText";
+import Greetings from "../ui/Greetings";
+import { Entypo } from "@expo/vector-icons";
+import AntDesign from "react-native-vector-icons/AntDesign";
 
 SplashScreen.preventAutoHideAsync();
 
-export default function Home({ setAudioName, setPlayStatus, playRadio }) {
+export default function Home({
+  setAudioName,
+  setPlayStatus,
+  playRadio,
+  navigation,
+  route,
+}) {
+  console.log(route);
   // Font
   const [fontsLoaded] = useFonts({
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
@@ -35,36 +42,61 @@ export default function Home({ setAudioName, setPlayStatus, playRadio }) {
   if (!fontsLoaded) return null;
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <ScrollView>
-        {/* Search */}
-
-        {/* <TextInput
-          style={styles.input}
-          placeholder="Search Station"
-          placeholderTextColor="white"
-        /> */}
-        <HomeText />
-
-        {/* Categories */}
-        {/* <Text
+      <ScrollView
+        style={{
+          flex: 1,
+          paddingBottom: 225,
+        }}
+      >
+        <View
           style={{
-            color: "white",
-            fontSize: 22,
-            fontWeight: "600",
-            marginLeft: 27,
-            marginBottom: 15,
-            fontFamily: "Poppins-Bold",
+            flex: 1,
+            flexDirection: "row",
+            flexWrap: "wrap",
+            marginTop: 25,
+            marginBottom: 5,
+            marginHorizontal: 27,
           }}
         >
-          Categories
-        </Text>
-        <View style={{ marginLeft: 27 }}>
-          <ScrollView horizontal>
-            {Tags.map((category) => {
-              return <CategoryCard categoryName={category} key={category} />;
-            })}
-          </ScrollView>
-        </View> */}
+          <View style={{ width: "70%" }}>
+            <Greetings />
+            <Text
+              style={{
+                color: "white",
+                fontSize: 17,
+                fontWeight: "400",
+                fontFamily: "Poppins-Regular",
+              }}
+            >
+              Listen radio from and about Brazil!
+            </Text>
+          </View>
+
+          <View
+            style={{
+              width: "30%",
+              flex: 1,
+              flexDirection: "row",
+              flexWrap: "wrap",
+              alignItems: "center",
+              justifyContent: "space-between",
+              alignContent: "center",
+              paddingLeft: 12,
+            }}
+          >
+            <TouchableOpacity onPress={() => <></>}>
+              <Entypo name="back-in-time" size={26} color="white" />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigation.navigate("Page")}>
+              <AntDesign name="staro" size={26} color="white" />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => <></>}>
+              <AntDesign name="setting" size={26} color="white" />
+            </TouchableOpacity>
+          </View>
+        </View>
 
         {/* Trending Now */}
         <View style={styles.section}>
@@ -116,71 +148,26 @@ export default function Home({ setAudioName, setPlayStatus, playRadio }) {
           )}
         />
 
-        {/* Station list */}
-        {/* <Text
-          style={{
-            color: "white",
-            fontSize: 22,
-            fontWeight: "600",
-            marginLeft: 27,
-            fontFamily: "Poppins-Bold",
-          }}
-        >
-          All Stations
-        </Text>
-        <View style={styles.radioStations}>
-          {data
-            .sort(function (a, b) {
-              return a.clicktrend - b.clicktrend;
-            })
-            .slice(0, 10)
-            .map((item) => {
-              const imgEl = lazy(() =>
-                require("./src/assets/adaptive-icon.png")
-              );
-              return (
-                <TouchableOpacity
-                  key={item.stationuuid}
-                  style={styles.card}
-                  onPress={() => {
-                    playRadio(
-                      item.url_resolved,
-                      item.name,
-                      item.favicon,
-                      setPlayStatus,
-                      setAudioName
-                    );
-                  }}
-                >
-                  {item.favicon !== "" ? (
-                    <Image
-                      source={{ uri: item.favicon }}
-                      style={{
-                        width: "auto",
-                        height: 90,
-                        resizeMode: "contain",
-                        justifyContent: "center",
-                        marginVertical: 15,
-                      }}
-                      loading="lazy"
-                    />
-                  ) : (
-                    <Image
-                      source={imgEl}
-                      style={{
-                        width: "auto",
-                        height: 90,
-                        resizeMode: "contain",
-                        marginVertical: 15,
-                      }}
-                    />
-                  )}
-
-                  <Text style={styles.cardTitle}>{item.name}</Text>
-                </TouchableOpacity>
-              );
-            })}
-        </View> */}
+        {/* Most Popular */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>All Stations</Text>
+          <Text style={styles.sectionSubtitle}>View all</Text>
+        </View>
+        <FlatList
+          data={data.slice(0, 10)}
+          horizontal={true}
+          style={{ height: "100%", marginLeft: 18 }}
+          renderItem={(item) => (
+            <StationCard
+              stationImage={item.item.favicon}
+              stationTitle={item.item.name}
+              stationUrl={item.item.url}
+              setAudioName={setAudioName}
+              setPlayStatus={setPlayStatus}
+              playRadio={playRadio}
+            />
+          )}
+        />
       </ScrollView>
     </View>
   );

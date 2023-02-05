@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     position: "absolute",
     bottom: 92,
-    backgroundColor: "#212121",
+    backgroundColor: "rgba(33, 33, 33, 0.9)",
     width: "95%",
     display: "flex",
     flexDirection: "row",

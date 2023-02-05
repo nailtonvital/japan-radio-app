@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     borderRadius: 8,
     color: "white",
-    height: 70,
+    height: 80,
     fontSize: 17,
     fontFamily: "Poppins-Regular",
   },

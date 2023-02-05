@@ -13,15 +13,13 @@ export default function Categories({ tags }) {
       <Text style={styles.label}>Categories</Text>
 
       {/* Station list */}
-        <View style={styles.radioStations}>
-          {tags
-
-            .map((item,index) => {
-              return (
-                <CategoryCard categoryName={item} key={index} />
-              );
+      <View style={styles.radioStations}>
+        {typeof tags == "undefined"
+          ? null
+          : tags.map((item, index) => {
+              return <CategoryCard categoryName={item} key={index} />;
             })}
-        </View>
+      </View>
     </ScrollView>
   );
 }
@@ -29,7 +27,9 @@ export default function Categories({ tags }) {
 const styles = StyleSheet.create({
   categories: {
     flex: 1,
-
+    backgroundColor: "#121212",
+    paddingTop: 55,
+    paddingBottom: 105,
   },
   input: {
     marginTop: 15,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 18,
     fontFamily: "Poppins-Regular",
-    color: 'white'
+    color: "white",
   },
   label: {
     color: "white",
@@ -61,5 +61,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignContent: "center",
     justifyContent: "center",
+    paddingBottom: 225,
   },
 });

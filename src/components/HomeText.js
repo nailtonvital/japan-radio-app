@@ -12,7 +12,7 @@ export default function HomeText() {
         flexDirection: "row",
         flexWrap: "wrap",
         marginTop: 25,
-        marginBottom: 20,
+        marginBottom: 5,
         marginHorizontal: 27,
       }}
     >
@@ -26,7 +26,7 @@ export default function HomeText() {
             fontFamily: "Poppins-Regular",
           }}
         >
-          Listen radio from and about Japan!
+          Listen radio from and about Brazil!
         </Text>
       </View>
 

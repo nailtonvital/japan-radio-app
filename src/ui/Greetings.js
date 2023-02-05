@@ -15,9 +15,8 @@ export default function Greetings() {
         <Text style={styles.greetings}>Good Morning</Text>
       ) : currentTime > 12 && currentTime <= 19 ? (
         <Text style={styles.greetings}>Good Afternoon</Text>
-      ) : currentTime > 19 && currentTime < 5 ? (
-        <Text style={styles.greetings}>Good Evening</Text>
-      ) : null}
+      ) : ( <Text style={styles.greetings}>Good Evening</Text>)
+      }
     </View>
   );
 }
