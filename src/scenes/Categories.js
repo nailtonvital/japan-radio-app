@@ -1,10 +1,21 @@
 import React from "react";
 import { View, StyleSheet, Text, TextInput, ScrollView } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import CategoryCard from "../components/CategoryCard";
 
 export default function Categories({ tags }) {
+  const insets = useSafeAreaInsets();
   return (
-    <ScrollView style={styles.categories}>
+    <ScrollView
+      style={{
+        flex: 1,
+        backgroundColor: "#121212",
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom + insets.bottom,
+        paddingLeft: insets.left,
+        paddingRight: insets.right,
+      }}
+    >
       <TextInput
         style={styles.input}
         placeholder="Search Station"
@@ -13,7 +24,17 @@ export default function Categories({ tags }) {
       <Text style={styles.label}>Categories</Text>
 
       {/* Station list */}
-      <View style={styles.radioStations}>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          flexWrap: "wrap",
+          alignItems: "center",
+          alignContent: "center",
+          justifyContent: "center",
+          paddingBottom: insets.top,
+        }}
+      >
         {typeof tags == "undefined"
           ? null
           : tags.map((item, index) => {
@@ -29,7 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#121212",
     paddingTop: 55,
-    paddingBottom: 105,
+
   },
   input: {
     marginTop: 15,
@@ -61,6 +82,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignContent: "center",
     justifyContent: "center",
-    paddingBottom: 225,
+
   },
 });

@@ -9,6 +9,7 @@ import {
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useState } from "react";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import data from "../assets/brazil.json";
 
@@ -26,7 +27,7 @@ export default function Home({
   navigation,
   route,
 }) {
-  console.log(route);
+  const insets = useSafeAreaInsets();
   // Font
   const [fontsLoaded] = useFonts({
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
@@ -38,16 +39,23 @@ export default function Home({
     }
   }, [fontsLoaded]);
 
+  console.log(insets);
+
   // font if
   if (!fontsLoaded) return null;
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
-      <ScrollView
-        style={{
-          flex: 1,
-          paddingBottom: 225,
-        }}
-      >
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "#121212",
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+        paddingLeft: insets.left,
+        paddingRight: insets.right,
+      }}
+      onLayout={onLayoutRootView}
+    >
+      <ScrollView style={{ paddingBottom: Math.max(insets.bottom, 16) }}>
         <View
           style={{
             flex: 1,

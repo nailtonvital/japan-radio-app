@@ -6,6 +6,7 @@ import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from "expo-av";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { AntDesign } from "@expo/vector-icons";
 
 import data from "./src/assets/japan.json";
@@ -52,14 +53,34 @@ async function playRadio(uri, name, setPlayStatus, setAudioName) {
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function Tabs(){
-  
-}
-
 export default function App() {
   // Audio
   const [isPlaying, setPlayStatus] = useState(false);
   const [audioName, setAudioName] = useState("");
+
+  function HomeStack() {
+    return (
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="Home">
+          {(props) => (
+            <Home
+              {...props}
+              playRadio={playRadio}
+              setAudioName={setAudioName}
+              setPlayStatus={setPlayStatus}
+            />
+          )}
+        </Stack.Screen>
+        <Stack.Screen name="Page">
+          {(props) => <Page {...props} />}
+        </Stack.Screen>
+      </Stack.Navigator>
+    );
+  }
 
   useEffect(() => {
     // Enable the audio run on background
@@ -86,11 +107,11 @@ export default function App() {
   }, [fontsLoaded]);
 
   const Tags = getCategories(data);
-console.log(Tags);
+  console.log(Tags);
   // font if
   if (!fontsLoaded) return null;
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <SafeAreaProvider style={styles.container} onLayout={onLayoutRootView}>
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
@@ -113,11 +134,7 @@ console.log(Tags);
               height: 45,
             },
             tabBarStyle: {
-              width: "100%",
-              position: "absolute",
-              bottom: 0,
               height: 80,
-
               justifyContent: "space-between",
               borderTopColor: "#212121",
               backgroundColor: "#212121",
@@ -126,24 +143,11 @@ console.log(Tags);
             tabBarInactiveTintColor: "#858386",
           })}
         >
-          <Tab.Screen name="home">
-            {(props) => (
-              <Home
-                {...props}
-                playRadio={playRadio}
-                setAudioName={setAudioName}
-                setPlayStatus={setPlayStatus}
-              />
-            )}
-          </Tab.Screen>
+          <Tab.Screen name="home" component={HomeStack} />
+
           <Tab.Screen name="search">
             {(props) => <Categories {...props} tags={Tags} />}
           </Tab.Screen>
-
-          {/* Nested routing */}
-          <Stack.Screen name="Page">
-            {(props) => <Page {...props} />}
-          </Stack.Screen>
         </Tab.Navigator>
       </NavigationContainer>
       {audioName ? (
@@ -154,7 +158,7 @@ console.log(Tags);
           setPlayStatus={setPlayStatus}
         />
       ) : null}
-    </View>
+    </SafeAreaProvider>
   );
 }
 
