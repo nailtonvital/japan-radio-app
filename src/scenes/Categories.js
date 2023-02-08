@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet, Text, TextInput, ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import CategoryCard from "../components/CategoryCard";
+import { MemoizedCategoryCard } from "../components/CategoryCard";
+import { RadioContext } from "../context/RadioContext";
 
-export default function Categories({ tags }) {
+export default function Categories() {
   const insets = useSafeAreaInsets();
+  const { tags } = useContext(RadioContext)
+
   return (
     <ScrollView
       style={{
@@ -38,7 +41,7 @@ export default function Categories({ tags }) {
         {typeof tags == "undefined"
           ? null
           : tags.map((item, index) => {
-              return <CategoryCard categoryName={item} key={index} />;
+              return <MemoizedCategoryCard categoryName={item} key={index} />;
             })}
       </View>
     </ScrollView>

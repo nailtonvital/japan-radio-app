@@ -1,25 +1,28 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {
-  Button,
-  Image,
+
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
+
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
+import { RadioContext } from '../context/RadioContext';
 
-export default function Player({ stationTitle, playFunction, isPlaying, setPlayStatus }) {
+
+export default function Player() {
+const { audioName, isPlaying, playPause, setPlayStatus } = useContext(RadioContext);
+
   return (
     <View style={styles.player}>
-      <Text style={styles.stationTitle}>{stationTitle}</Text>
+      <Text style={styles.stationTitle}>{audioName}</Text>
       <Icon
         name={isPlaying ? "pausecircleo" : "playcircleo"}
         color="white"
         size={32}
         style={styles.playerIcon}
         onPress={() => {
-          playFunction(isPlaying, setPlayStatus);
+          playPause(isPlaying, setPlayStatus);
         }}
       ></Icon>
     </View>

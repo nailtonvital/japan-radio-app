@@ -1,10 +1,9 @@
-import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { memo } from "react";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
 
-const randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
-export default function CategoryCard({ categoryName }) {
+export function CategoryCard({ categoryName }) {
   return (
     <TouchableOpacity style={styles.card}>
       <LinearGradient
@@ -54,3 +53,5 @@ const styles = StyleSheet.create({
   },
   justifyContent: "center",
 });
+
+export const MemoizedCategoryCard = memo(CategoryCard);

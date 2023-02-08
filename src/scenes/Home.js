@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import data from "../assets/japan.json";
@@ -17,17 +17,18 @@ import StationCard from "../components/StationCard";
 import Greetings from "../ui/Greetings";
 import { Entypo } from "@expo/vector-icons";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { RadioContext } from "../context/RadioContext";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function Home({
-  setAudioName,
-  setPlayStatus,
-  playRadio,
   navigation,
   route,
 }) {
   const insets = useSafeAreaInsets();
+
+  const { setAudioName, setPlayStatus, playRadio }= useContext(RadioContext)
+
   // Font
   const [fontsLoaded] = useFonts({
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
