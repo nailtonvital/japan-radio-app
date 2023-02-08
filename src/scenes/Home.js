@@ -11,7 +11,7 @@ import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import data from "../assets/brazil.json";
+import data from "../assets/japan.json";
 
 import StationCard from "../components/StationCard";
 import Greetings from "../ui/Greetings";
@@ -39,7 +39,7 @@ export default function Home({
     }
   }, [fontsLoaded]);
 
-  console.log(insets);
+
 
   // font if
   if (!fontsLoaded) return null;
@@ -92,7 +92,9 @@ export default function Home({
               paddingLeft: 12,
             }}
           >
-            <TouchableOpacity onPress={() => <></>}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("RecentPlayed")}
+            >
               <Entypo name="back-in-time" size={26} color="white" />
             </TouchableOpacity>
 
@@ -127,6 +129,7 @@ export default function Home({
               setAudioName={setAudioName}
               setPlayStatus={setPlayStatus}
               playRadio={playRadio}
+              stationId={item.item.changeuuid}
             />
           )}
         />

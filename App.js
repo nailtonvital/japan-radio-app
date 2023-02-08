@@ -1,4 +1,4 @@
-import { Animated, ScrollView, StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useEffect, useState } from "react";
@@ -9,6 +9,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { AntDesign } from "@expo/vector-icons";
 
+
 import data from "./src/assets/japan.json";
 
 import getCategories from "./src/utils/utils";
@@ -17,6 +18,8 @@ import Home from "./src/scenes/Home";
 
 import Categories from "./src/scenes/Categories";
 import Page from "./src/scenes/Page";
+import { getRadios, removeRadios } from "./src/utils/recentPlayed";
+import RecentPlayed from "./src/scenes/RecentPlayed";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -50,6 +53,8 @@ async function playRadio(uri, name, setPlayStatus, setAudioName) {
   }
 }
 
+
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -57,6 +62,7 @@ export default function App() {
   // Audio
   const [isPlaying, setPlayStatus] = useState(false);
   const [audioName, setAudioName] = useState("");
+
 
   function HomeStack() {
     return (
@@ -75,8 +81,8 @@ export default function App() {
             />
           )}
         </Stack.Screen>
-        <Stack.Screen name="Page">
-          {(props) => <Page {...props} />}
+        <Stack.Screen name="RecentPlayed">
+          {(props) => <RecentPlayed {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     );
@@ -93,6 +99,9 @@ export default function App() {
       interruptionModeAndroid: InterruptionModeAndroid.DuckOthers,
       playThroughEarpieceAndroid: false,
     });
+  //   removeRadios()
+  // getRadios()
+
   }, []);
 
   // Font
@@ -107,7 +116,7 @@ export default function App() {
   }, [fontsLoaded]);
 
   const Tags = getCategories(data);
-  console.log(Tags);
+
   // font if
   if (!fontsLoaded) return null;
   return (

@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 import ImageError from "../assets/error-picture.png";
+import { setRecentPlayed } from "../utils/recentPlayed";
 
 export default function StationCard({
   stationTitle,
@@ -8,13 +9,15 @@ export default function StationCard({
   stationImage,
   setPlayStatus,
   setAudioName,
-  playRadio
+  playRadio,
+  stationId
 }) {
   return (
     <TouchableOpacity
       style={styles.card}
       onPress={() => {
         playRadio(stationUrl, stationTitle, setPlayStatus, setAudioName);
+        setRecentPlayed(stationId, stationTitle, stationImage, stationUrl);
       }}
     >
       {stationImage !== "" ? (
