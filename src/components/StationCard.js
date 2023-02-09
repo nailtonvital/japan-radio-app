@@ -1,9 +1,9 @@
-import React from "react";
+import {memo} from "react";
 import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 import ImageError from "../assets/error-picture.png";
 import { setRecentPlayed } from "../utils/recentPlayed";
 
-export default function StationCard({
+export function StationCard({
   stationTitle,
   stationUrl,
   stationImage,
@@ -65,3 +65,5 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
 });
+
+export const MemoizedStationCard = memo(StationCard)

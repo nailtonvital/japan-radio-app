@@ -8,12 +8,12 @@ import {
 } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import React, { useCallback, useContext, useState } from "react";
+import { useCallback, useContext } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import data from "../assets/japan.json";
 
-import StationCard from "../components/StationCard";
+import { MemoizedStationCard } from "../components/StationCard";
 import Greetings from "../ui/Greetings";
 import { Entypo } from "@expo/vector-icons";
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -123,7 +123,7 @@ export default function Home({
           horizontal={true}
           style={{ height: "100%", marginLeft: 18 }}
           renderItem={(item) => (
-            <StationCard
+            <MemoizedStationCard
               stationImage={item.item.favicon}
               stationTitle={item.item.name}
               stationUrl={item.item.url}
@@ -149,7 +149,7 @@ export default function Home({
           horizontal={true}
           style={{ height: "100%", marginLeft: 18 }}
           renderItem={(item) => (
-            <StationCard
+            <MemoizedStationCard
               stationImage={item.item.favicon}
               stationTitle={item.item.name}
               stationUrl={item.item.url}
@@ -170,7 +170,7 @@ export default function Home({
           horizontal={true}
           style={{ height: "100%", marginLeft: 18 }}
           renderItem={(item) => (
-            <StationCard
+            <MemoizedStationCard
               stationImage={item.item.favicon}
               stationTitle={item.item.name}
               stationUrl={item.item.url}

@@ -83,6 +83,7 @@ function RadioProvider({ children }) {
         tags,
         playPause,
         playRadio,
+        data
       }}
       onLayout={onLayoutRootView}
     >

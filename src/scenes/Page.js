@@ -1,8 +1,11 @@
-import React from "react";
-import { View, StyleSheet, Text, TextInput, ScrollView } from "react-native";
-import CategoryCard from "../components/CategoryCard";
+import { useContext } from "react";
+import { View, StyleSheet, Text, ScrollView } from "react-native";
+import { RadioContext } from "../context/RadioContext";
+import { getRadios } from "../utils/recentPlayed";
+
 
 export default function Page() {
+  const {data} = useContext(RadioContext)
 
   return (
     <ScrollView style={styles.container}>

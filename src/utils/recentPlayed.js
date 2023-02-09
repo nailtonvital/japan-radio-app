@@ -3,8 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const getRadios = async () => {
   try {
     const radios = await AsyncStorage.getItem("radios");
-    
-    return JSON.parse(radios);
+    return radios
   } catch (error) {
     console.log(error);
   }
@@ -18,13 +17,13 @@ const removeRadios = async () => {
   }
 };
 
-const setRecentPlayed = async (radioName, stationTitle, stationImage, stationUrl) => {
+const setRecentPlayed = async (radioId, stationTitle, stationImage, stationUrl) => {
   try {
     let radio = {
-      radio: radioName,
+      radio: radioId,
       name: stationTitle,
       img: stationImage,
-      url: stationUrl
+      url: stationUrl,
     };
     AsyncStorage.getItem("radios").then((radios) => {
       const c = radios ? JSON.parse(radios) : [];

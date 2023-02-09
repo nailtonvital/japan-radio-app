@@ -1,34 +1,48 @@
-import {useEffect, useState} from "react";
-import { View, StyleSheet, Text, TextInput, ScrollView } from "react-native";
+import { useContext, useEffect, useState } from "react";
+import {
+  View,
+  StyleSheet,
+  Text,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
-import CategoryCard from "../components/CategoryCard";
-import { getRadios } from "../utils/recentPlayed";
-import StationCard from "../components/StationCard";
-
+import { MemoizedStationCard } from "../components/StationCard";
+import { RadioContext } from "../context/RadioContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { setRecentPlayed } from "../utils/recentPlayed";
 
 export default function RecentPlayed() {
-    const [recent, setRecent] = useState([])
+  const [radioStations, setRadioStations] = useState([]);
+  const { setAudioName, setPlayStatus, playRadio } = useContext(RadioContext);
 
   const insets = useSafeAreaInsets();
 
-  useEffect(()=>{
-    getRadios().then((item) => {
-      setRecent(item);
-    }).finally(()=>{
+  function removeDuplicates(array) {
+    return [...new Set(array)];
+  }
 
-    })
-  },[])
+  useEffect(() => {
+    const fetchRadioStations = async () => {
+      try {
+        const radioStationsData = await AsyncStorage.getItem("radios");
+        const uniqueRadios = removeDuplicates(JSON.parse(radioStationsData));
+        setRadioStations(uniqueRadios);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchRadioStations();
+  }, []);
 
- 
-  
   return (
     <ScrollView
       style={{
         flex: 1,
         backgroundColor: "#121212",
-
-        paddingBottom: insets.bottom + insets.bottom,
+        paddingBottom: insets.top + insets.top,
         paddingLeft: insets.left,
         paddingRight: insets.right,
       }}
@@ -46,7 +60,7 @@ export default function RecentPlayed() {
 
       <View
         style={{
-          minHeight: 415,
+          minHeight: 115,
           backgroundColor: "#121212",
           marginTop: -20,
           borderRadius: 25,
@@ -56,16 +70,27 @@ export default function RecentPlayed() {
           alignItems: "center",
           alignContent: "center",
           justifyContent: "center",
-          paddingBottom: insets.top,
+          paddingTop: 35,
+          paddingBottom: insets.top + insets.top,
         }}
       >
-        {recent ? recent.map(item=>{
-<StationCard/>
-        }) : (
-          <Text style={{ color: "white", marginTop: "70%", fontSize: 22 }}>
-            No radio played recently
-          </Text>
-        )}
+        {radioStations.map((radioStation) => (
+          <TouchableOpacity
+            key={radioStation.radio}
+            style={styles.radioContainer}
+            onPress={() => {
+        playRadio(radioStation.url, radioStation.name, setPlayStatus, setAudioName);
+        setRecentPlayed(
+          radioStation.radio,
+          radioStation.name,
+          radioStation.img,
+          radioStation.url
+        );
+      }}
+          >
+            <Text style={styles.radioName}>{radioStation.name}</Text>
+          </TouchableOpacity>
+        ))}
       </View>
 
       {/* Station list
@@ -103,10 +128,10 @@ const styles = StyleSheet.create({
   },
   headerText: {
     flex: 1,
-    marginTop:'42%',
+    marginTop: "42%",
     fontSize: 27,
     color: "white",
-    fontFamily: 'Poppins-Bold'
+    fontFamily: "Poppins-Bold",
   },
   label: {
     color: "white",
@@ -116,12 +141,18 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontFamily: "Poppins-Bold",
   },
-  radioStations: {
-    flex: 1,
-    flexDirection: "row",
-    flexWrap: "wrap",
+  radioContainer: {
+    width: "80%",
+    marginVertical: 10,
+    padding: 20,
+    backgroundColor: "#212121",
+    borderRadius: 10,
     alignItems: "center",
-    alignContent: "center",
-    justifyContent: "center",
+  },
+  radioName: {
+    fontSize: 18,
+    color: "white",
+    fontSize: 17,
+    fontFamily: "Poppins-Regular",
   },
 });
