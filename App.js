@@ -11,6 +11,7 @@ import Home from "./src/scenes/Home";
 import Categories from "./src/scenes/Categories";
 import RecentPlayed from "./src/scenes/RecentPlayed";
 import RadioProvider from "./src/context/RadioContext";
+import Settings from "./src/scenes/Settings";
 
 
 
@@ -27,7 +28,7 @@ export default function App() {
         }}
       >
         <Stack.Screen name="Home" component={Home} />
-
+        <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen name="RecentPlayed" component={RecentPlayed} />
       </Stack.Navigator>
     );

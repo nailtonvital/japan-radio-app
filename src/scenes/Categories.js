@@ -36,6 +36,7 @@ export default function Categories() {
           alignContent: "center",
           justifyContent: "center",
           paddingBottom: insets.top,
+          marginBottom: 85,
         }}
       >
         {typeof tags == "undefined"
@@ -53,15 +54,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#121212",
     paddingTop: 55,
-
   },
   input: {
     marginTop: 15,
     marginHorizontal: 18,
     borderStyle: "solid",
     borderWidth: 1,
-    borderColor: "#C0C0C0",
-    borderRadius: 100,
+    borderColor: "#3C3C3E",
+    backgroundColor: "#212121",
+    borderRadius: 15,
     height: 60,
     marginBottom: 25,
     opacity: 5,
@@ -85,6 +86,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignContent: "center",
     justifyContent: "center",
-
   },
 });

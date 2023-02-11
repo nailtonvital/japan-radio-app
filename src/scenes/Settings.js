@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, View, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export default function Page({ navigation }) {
+export default function Settings({ navigation }) {
   const insets = useSafeAreaInsets();
 
   return (
@@ -33,18 +33,14 @@ export default function Page({ navigation }) {
           styles.contentSection,
         ]}
       >
-        <View style={styles.card}>
-          <Text style={styles.title}>F.A.Q.</Text>
-        </View>
+        
         <View style={styles.card}>
           <Text style={styles.title}>Contact us</Text>
         </View>
         <View style={styles.card}>
           <Text style={styles.title}>About</Text>
         </View>
-        <View style={styles.card}>
-          <Text style={styles.title}>More Apps</Text>
-        </View>
+       
       </View>
     </ScrollView>
   );
@@ -83,9 +79,9 @@ const styles = StyleSheet.create({
     flex: 0,
     width: "87%",
     backgroundColor: "#3C3C3E",
-    borderRadius: 5,
-    padding: 15,
-    marginBottom: 15,
+    borderRadius: 12,
+    padding:15,
+    marginBottom:15
   },
   title: {
     fontSize: 19,

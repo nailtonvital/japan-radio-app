@@ -56,7 +56,7 @@ export default function Home({
       }}
       onLayout={onLayoutRootView}
     >
-      <ScrollView style={{ paddingBottom: Math.max(insets.bottom, 16) }}>
+      <ScrollView style={{ paddingBottom: 76 }}>
         <View
           style={{
             flex: 1,
@@ -90,7 +90,7 @@ export default function Home({
               alignItems: "center",
               justifyContent: "space-between",
               alignContent: "center",
-              paddingLeft: 12,
+              paddingLeft: 40,
             }}
           >
             <TouchableOpacity
@@ -99,11 +99,11 @@ export default function Home({
               <Entypo name="back-in-time" size={26} color="white" />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate("Page")}>
+            {/* <TouchableOpacity onPress={() => navigation.navigate("Page")}>
               <AntDesign name="staro" size={26} color="white" />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
-            <TouchableOpacity onPress={() => <></>}>
+            <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
               <AntDesign name="setting" size={26} color="white" />
             </TouchableOpacity>
           </View>
@@ -168,7 +168,7 @@ export default function Home({
         <FlatList
           data={data.slice(0, 10)}
           horizontal={true}
-          style={{ height: "100%", marginLeft: 18 }}
+          style={{ height: "100%", marginLeft: 18, marginBottom: 85 }}
           renderItem={(item) => (
             <MemoizedStationCard
               stationImage={item.item.favicon}
