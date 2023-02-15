@@ -10,6 +10,7 @@ import Player from "./src/components/Player";
 import Home from "./src/scenes/Home";
 import Categories from "./src/scenes/Categories";
 import RecentPlayed from "./src/scenes/RecentPlayed";
+import Page from "./src/scenes/Page";
 import RadioProvider from "./src/context/RadioContext";
 import Settings from "./src/scenes/Settings";
 
@@ -33,10 +34,22 @@ export default function App() {
       </Stack.Navigator>
     );
   }
+  function CategoryStack() {
+    return (
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="Search" component={Categories} />
+        <Stack.Screen name="Page" component={Page} />
+      </Stack.Navigator>
+    );
+  }
 
   return (
     <RadioProvider>
-      <SafeAreaProvider style={styles.container} >
+      <SafeAreaProvider style={styles.container}>
         <NavigationContainer>
           <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -69,10 +82,10 @@ export default function App() {
             })}
           >
             <Tab.Screen name="home" component={HomeStack} />
-            <Tab.Screen name="search" component={Categories} />
+            <Tab.Screen name="search" component={CategoryStack} />
           </Tab.Navigator>
         </NavigationContainer>
-         <Player /> 
+        <Player />
       </SafeAreaProvider>
     </RadioProvider>
   );

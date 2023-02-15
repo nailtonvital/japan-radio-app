@@ -4,9 +4,9 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { MemoizedCategoryCard } from "../components/CategoryCard";
 import { RadioContext } from "../context/RadioContext";
 
-export default function Categories() {
+export default function Categories({ navigation, route }) {
   const insets = useSafeAreaInsets();
-  const { tags } = useContext(RadioContext)
+  const { tags } = useContext(RadioContext);
 
   return (
     <ScrollView
@@ -42,7 +42,7 @@ export default function Categories() {
         {typeof tags == "undefined"
           ? null
           : tags.map((item, index) => {
-              return <MemoizedCategoryCard categoryName={item} key={index} />;
+              return <MemoizedCategoryCard categoryName={item} key={index} navigation={navigation} route={route} />;
             })}
       </View>
     </ScrollView>

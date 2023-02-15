@@ -3,9 +3,9 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
 
 
-export function CategoryCard({ categoryName }) {
+export function CategoryCard({ categoryName, navigation,route }) {
   return (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={()=>{navigation.navigate("Page",{name:categoryName});}}>
       <LinearGradient
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}

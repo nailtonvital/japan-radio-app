@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -13,6 +13,10 @@ import { MemoizedStationCard } from "../components/StationCard";
 import { RadioContext } from "../context/RadioContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { setRecentPlayed } from "../utils/recentPlayed";
+
+const recentCard = ({item})=>{
+
+}
 
 export default function RecentPlayed() {
   const [radioStations, setRadioStations] = useState([]);
@@ -29,7 +33,7 @@ export default function RecentPlayed() {
       try {
         const radioStationsData = await AsyncStorage.getItem("radios");
         const uniqueRadios = removeDuplicates(JSON.parse(radioStationsData));
-        setRadioStations(uniqueRadios);
+        useMemo(setRadioStations(uniqueRadios));
       } catch (error) {
         console.error(error);
       }
@@ -74,19 +78,24 @@ export default function RecentPlayed() {
           paddingBottom: insets.top + insets.top,
         }}
       >
-        {radioStations.map((radioStation) => (
+        {radioStations.reverse().map((radioStation, index) => (
           <TouchableOpacity
-            key={radioStation.radio}
+            key={index}
             style={styles.radioContainer}
             onPress={() => {
-        playRadio(radioStation.url, radioStation.name, setPlayStatus, setAudioName);
-        setRecentPlayed(
-          radioStation.radio,
-          radioStation.name,
-          radioStation.img,
-          radioStation.url
-        );
-      }}
+              playRadio(
+                radioStation.url,
+                radioStation.name,
+                setPlayStatus,
+                setAudioName
+              );
+              setRecentPlayed(
+                radioStation.radio,
+                radioStation.name,
+                radioStation.img,
+                radioStation.url
+              );
+            }}
           >
             <Text style={styles.radioName}>{radioStation.name}</Text>
           </TouchableOpacity>

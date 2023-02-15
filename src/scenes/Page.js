@@ -1,19 +1,35 @@
-import React from "react";
-import { ScrollView, StyleSheet, View, Text } from "react-native";
+import React, { useContext } from "react";
+import {
+  ScrollView,
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { RadioContext } from "../context/RadioContext";
+import { MemoizedStationCard, StationCard } from "../components/StationCard";
+import ImageError from "../assets/error-picture.png";
+import { setRecentPlayed } from "../utils/recentPlayed";
 
-export default function Page({ navigation }) {
+export default function Page({ navigation, route }) {
   const insets = useSafeAreaInsets();
+
+  const { setAudioName, setPlayStatus, playRadio, data } =
+    useContext(RadioContext);
+
+  const { name } = route.params;
+
+  let result = data.filter((i) => i.tags.includes(name));
+  console.log(result);
 
   return (
     <ScrollView
       style={{
         flex: 1,
         backgroundColor: "#121212",
-        paddingBottom: insets.top + insets.top,
-        paddingLeft: insets.left,
-        paddingRight: insets.right,
       }}
     >
       <View>
@@ -23,28 +39,40 @@ export default function Page({ navigation }) {
           colors={["#642B73", "#C6426E"]}
           style={styles.header}
         >
-          <Text style={styles.headerText}>Settings</Text>
+          <Text style={styles.headerText}>
+            {name.charAt(0).toUpperCase() + name.slice(1)}
+          </Text>
         </LinearGradient>
       </View>
 
       <View
-        style={[
-          { paddingBottom: insets.top + insets.top },
-          styles.contentSection,
-        ]}
+        style={{
+          minHeight: 115,
+          backgroundColor: "#121212",
+          marginTop: -20,
+          borderRadius: 25,
+          flex: 1,
+          flexDirection: "row",
+          flexWrap: "wrap",
+          alignItems: "center",
+          alignContent: "center",
+          justifyContent: "center",
+          paddingTop: 35,
+          paddingBottom: insets.top + insets.top,
+        }}
       >
-        <View style={styles.card}>
-          <Text style={styles.title}>F.A.Q.</Text>
-        </View>
-        <View style={styles.card}>
-          <Text style={styles.title}>Contact us</Text>
-        </View>
-        <View style={styles.card}>
-          <Text style={styles.title}>About</Text>
-        </View>
-        <View style={styles.card}>
-          <Text style={styles.title}>More Apps</Text>
-        </View>
+        {result.map((item,index) => (
+          <TouchableOpacity
+            key={index}
+            style={styles.radioContainer}
+            onPress={() => {
+              playRadio(item.url, item.name, setPlayStatus, setAudioName);
+              setRecentPlayed(item.radio, item.name, item.img, item.url);
+            }}
+          >
+            <Text style={styles.radioName}>{item.name}</Text>
+          </TouchableOpacity>
+        ))}
       </View>
     </ScrollView>
   );
@@ -67,30 +95,42 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins-Bold",
   },
   contentSection: {
-    minHeight: 115,
-    backgroundColor: "#121212",
-    marginTop: -20,
-    borderRadius: 25,
     flex: 1,
     flexDirection: "row",
     flexWrap: "wrap",
     alignItems: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    paddingTop: 35,
+    marginHorizontal: 18,
+    marginTop: 8,
   },
   card: {
-    flex: 0,
-    width: "87%",
+    backgroundColor: "#2E2E2E",
+    width: "45%",
+    borderRadius: 8,
+    marginHorizontal: 8,
+    marginVertical: 8,
+  },
+  cardTitle: {
     backgroundColor: "#3C3C3E",
-    borderRadius: 5,
-    padding: 15,
-    marginBottom: 15,
-  },
-  title: {
-    fontSize: 19,
+    padding: 12,
+    borderRadius: 8,
     color: "white",
-    fontFamily: "Poppins-Bold",
+    minHeight: 60,
+    fontSize: 17,
+    textAlign: "center",
+    fontFamily: "Poppins-Regular",
   },
-  subTitle: {},
+  radioContainer: {
+    width: "80%",
+    marginVertical: 10,
+    padding: 20,
+    backgroundColor: "#212121",
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  radioName: {
+    fontSize: 18,
+    color: "white",
+    fontSize: 17,
+    fontFamily: "Poppins-Regular",
+  },
 });

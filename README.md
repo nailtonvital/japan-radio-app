@@ -17,7 +17,7 @@ This is a app that join various radios around the world into a sigle app
 ### Screens/Components
 - [x] Home
 - [x] Search
-- [ ] Category
+- [x] Category
 - [ ] Settings
 - [x] Player
 - [x] Navbar
