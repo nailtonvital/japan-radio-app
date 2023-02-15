@@ -24,10 +24,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.nailtonvital.radioapp"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f14ff625-d1ba-47c0-8e9c-23c7f7e732c2"
+      }
     }
   }
 }
