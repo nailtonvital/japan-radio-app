@@ -1,4 +1,9 @@
-# radio-app
+<p align="center">
+<img src="https://user-images.githubusercontent.com/51789882/219218969-fd009ff0-143a-4e60-a6fb-de1a6e7d1338.png" width="300" height="300" >
+  <h1 align="center">Japan Radio App</h1>
+</p>
+
+
 
 ## About
 This is a app that join various radios from japan into a sigle app
