@@ -46,4 +46,4 @@ You can access the .apk file [here](https://github.com/nailtonvital/japan-radio-
 - Figma
 
 ## Credits
-The radios is from [radio-browser](https://api.radio-browser.info/)
+The radios is from [radio-browser-api](https://api.radio-browser.info/)
