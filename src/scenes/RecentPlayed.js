@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -14,10 +14,6 @@ import { RadioContext } from "../context/RadioContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { setRecentPlayed } from "../utils/recentPlayed";
 
-const recentCard = ({item})=>{
-
-}
-
 export default function RecentPlayed() {
   const [radioStations, setRadioStations] = useState([]);
   const { setAudioName, setPlayStatus, playRadio } = useContext(RadioContext);
@@ -28,18 +24,17 @@ export default function RecentPlayed() {
     return [...new Set(array)];
   }
 
-  useEffect(() => {
     const fetchRadioStations = async () => {
       try {
         const radioStationsData = await AsyncStorage.getItem("radios");
         const uniqueRadios = removeDuplicates(JSON.parse(radioStationsData));
-        useMemo(setRadioStations(uniqueRadios));
+        setRadioStations(uniqueRadios);
       } catch (error) {
         console.error(error);
       }
     };
     fetchRadioStations();
-  }, []);
+
 
   return (
     <ScrollView

@@ -13,6 +13,7 @@ import { RadioContext } from '../context/RadioContext';
 export default function Player() {
 const { audioName, isPlaying, playPause, setPlayStatus } = useContext(RadioContext);
 
+if (!audioName){ return null}
   return (
     <View style={styles.player}>
       <Text style={styles.stationTitle}>{audioName}</Text>

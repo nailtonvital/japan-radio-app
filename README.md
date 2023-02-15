@@ -11,8 +11,10 @@ This is a app that join various radios around the world into a sigle app
 - [x] Play on background
 - [ ] Search
 - [x] Recent played (Improvement needed)
+- [ ] Favorites
 - [x] Navigation
 - [x] Categories split
+- [ ] Error handling
 
 ### Screens/Components
 - [x] Home

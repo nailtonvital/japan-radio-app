@@ -23,7 +23,6 @@ export default function Page({ navigation, route }) {
   const { name } = route.params;
 
   let result = data.filter((i) => i.tags.includes(name));
-  console.log(result);
 
   return (
     <ScrollView

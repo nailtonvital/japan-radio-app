@@ -33,14 +33,21 @@ export default function Settings({ navigation }) {
           styles.contentSection,
         ]}
       >
-        
         <View style={styles.card}>
           <Text style={styles.title}>Contact us</Text>
+          <Text style={styles.subTitle}>nailtonvital35@gmail.com</Text>
+          <Text
+            style={{
+              fontSize: 17,
+              color: "white",
+              fontFamily: "Poppins-Regular",
+              alignSelf: "center",
+              marginTop:15
+            }}
+          >
+            App build with ❤️ by Nailton Vital
+          </Text>
         </View>
-        <View style={styles.card}>
-          <Text style={styles.title}>About</Text>
-        </View>
-       
       </View>
     </ScrollView>
   );
@@ -80,13 +87,17 @@ const styles = StyleSheet.create({
     width: "87%",
     backgroundColor: "#3C3C3E",
     borderRadius: 12,
-    padding:15,
-    marginBottom:15
+    padding: 15,
+    marginBottom: 15,
   },
   title: {
     fontSize: 19,
     color: "white",
     fontFamily: "Poppins-Bold",
   },
-  subTitle: {},
+  subTitle: {
+    fontSize: 19,
+    color: "white",
+    fontFamily: "Poppins-Regular",
+  },
 });
