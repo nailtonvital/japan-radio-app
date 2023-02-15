@@ -1,7 +1,7 @@
 # radio-app
 
 ## About
-This is a app that join various radios around the world into a sigle app
+This is a app that join various radios from japan into a sigle app
 
 ## Checklist
 
