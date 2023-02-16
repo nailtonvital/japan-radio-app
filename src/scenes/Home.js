@@ -77,7 +77,7 @@ export default function Home({
                 fontFamily: "Poppins-Regular",
               }}
             >
-              Listen radio from and about Brazil!
+              Listen radio from and about Japan!
             </Text>
           </View>
 
