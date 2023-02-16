@@ -46,7 +46,7 @@ Home |  Settings | Recent Played | Search/Category | Category Page
 
 
 ## Installation
-You can access the .apk file [here](https://github.com/nailtonvital/japan-radio-app/releases/tag/beta)
+You can access the .apk file and the files [here](https://github.com/nailtonvital/japan-radio-app/releases/tag/v-0.1.1-beta)
 
 ## Tools
 - Expo
