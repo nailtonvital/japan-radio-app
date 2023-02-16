@@ -1,7 +1,20 @@
-# radio-app
+<p align="center">
+<img src="https://user-images.githubusercontent.com/51789882/219218969-fd009ff0-143a-4e60-a6fb-de1a6e7d1338.png" width="300" height="300" >
+  <h1 align="center">Japan Radio App</h1>
+</p>
+
+Content Table
+=================
+<!--ts-->
+   * [About](#about)
+   * [Checklist](#checklist)
+   * [Installation](#installation)
+   * [Tools](#tools)
+   * [Credits](#credits)
+<!--te-->
 
 ## About
-This is a app that join various radios around the world into a sigle app
+This is a app that join various radios from japan into a sigle app
 
 ## Checklist
 
@@ -23,3 +36,14 @@ This is a app that join various radios around the world into a sigle app
 - [ ] Settings
 - [x] Player
 - [x] Navbar
+
+## Installation
+You can access the .apk file [here](https://github.com/nailtonvital/japan-radio-app/releases/tag/beta)
+
+## Tools
+- Expo
+- Expo-av
+- Figma
+
+## Credits
+The radios is from [radio-browser-api](https://api.radio-browser.info/)
