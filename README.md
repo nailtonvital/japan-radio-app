@@ -28,12 +28,13 @@ This is a app that join various radios from japan into a sigle app
 - [x] Navigation
 - [x] Categories split
 - [ ] Error handling
+- [ ] View All
 
 ### Screens/Components
 - [x] Home
 - [x] Search
 - [x] Category
-- [ ] Settings
+- [x] Settings (Improvement needed)
 - [x] Player
 - [x] Navbar
 
