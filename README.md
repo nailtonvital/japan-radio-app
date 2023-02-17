@@ -53,3 +53,5 @@ You can access the .apk file and the files [here](https://github.com/nailtonvita
 
 ## Credits
 The radios is from [radio-browser-api](https://api.radio-browser.info/)
+
+> The logo is an original creation, all rights belong to me.
